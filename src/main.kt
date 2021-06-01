@@ -7,7 +7,7 @@
 
 
 fun main(args: Array<String>) {
-    println("Hello, vLemonn!")
+    println("Hello, Lemon!")
 }
 
 
