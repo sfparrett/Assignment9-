@@ -1,0 +1,364 @@
+
+import java.util.ArrayList
+import java.lang.reflect.Array
+import java.util.Hashtable
+import kotlin.system.exitProcess
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
+
+abstract class ExprC
+internal class numC(var n: Int) : ExprC()
+internal class stringC(var s: String) : ExprC()
+internal class idC(var name: String) : ExprC()
+internal class lamC(var body: ExprC, var parm: ArrayList<String>) : ExprC()
+internal class appC(var func: ExprC, var args: ArrayList<ExprC>) : ExprC()
+internal class ifC(var test: ExprC, var then: ExprC, var elsey: ExprC) : ExprC()
+
+
+abstract class Value {
+    internal abstract fun serialize(): String
+}
+
+class numV( val n: Int) : Value() {
+
+    override fun serialize(): String {
+        return Integer.toString(n)
+    }
+    override fun equals(other: Any?)
+            = (other is numV)
+            && n == other.n
+}
+
+class stringV( val s: String) : Value() {
+
+    override fun serialize(): String {
+        return s
+    }
+}
+
+class boolV( val b: Boolean) : Value() {
+
+    override fun serialize(): String {
+        return java.lang.Boolean.toString(b)
+    }
+    override fun equals(other: Any?)
+            = (other is boolV)
+            && b == other.b
+}
+
+class cloV(val parms: ArrayList<String>, val body: ExprC, val env: HashMap<String, Value>) : Value() {
+
+    override fun serialize(): String {
+        return "#<procedure>"
+    }
+}
+
+class primV( val op: String) : Value() {
+
+    override fun serialize(): String {
+        return "#<primop>"
+    }
+}
+
+fun eagerEvaluation(str: String, args: ArrayList<Value>): Value {
+    // numC
+    if (str == "plus") {
+        plus(args);
+    }
+    else if (str == "minus") {
+        minus(args);
+    }
+    else if (str == "mult") {
+        mult(args);
+    }
+    else if (str == "div") {
+        div(args);
+    }
+    else if(str == "leq") {
+        leq(args);
+    }
+    else if(str == "eqFunc") {
+        eqFunc(args);
+    }
+    myError(args)
+    return numV(0)
+}
+
+fun plus(args: ArrayList<Value>): Value {
+    val new_args = unwrapList(args)
+    if(new_args.size != 2) {
+        println("Error wrong number of args for plus: ${args}")
+        exitProcess(0)
+    }
+    print(new_args[0] + new_args[1])
+    return numV(new_args[0] + new_args[1])
+}
+
+fun minus(args: ArrayList<Value>): Value {
+    val new_args = unwrapList(args)
+    if(new_args.size != 2) {
+        println("Error wrong number of args for minus: ${args}")
+        exitProcess(0)
+    }
+    return numV(new_args[0] - new_args[1])
+}
+
+fun mult(args: ArrayList<Value>): Value {
+    val new_args = unwrapList(args)
+    if(new_args.size != 2) {
+        println("Error wrong number of args for mult: ${args}")
+        exitProcess(0)
+    }
+    return numV(new_args[0] * new_args[1])
+}
+
+fun div(args: ArrayList<Value>): Value {
+    val new_args = unwrapList(args)
+    if(new_args.size != 2) {
+        println("Error wrong number of args for div: ${args}")
+        exitProcess(0)
+    }
+    if(new_args[1] == 0) {
+        println("Error division by 0: ${args}")
+        exitProcess(0)
+    }
+    return numV(new_args[0] / new_args[1])
+}
+
+fun leq(args: ArrayList<Value>): Value {
+    val new_args = unwrapList(args)
+    if(new_args.size != 2) {
+        println("Error wrong number of args for leq: ${args}")
+        exitProcess(0)
+    }
+    return boolV(new_args[0] <= new_args[1])
+}
+
+fun eqFunc(args: ArrayList<Value>): Value {
+    val new_args = unwrapList(args)
+    if(new_args.size != 2) {
+        println("Error wrong number of args for eqFunc: ${args}")
+        exitProcess(0)
+    }
+    return boolV(new_args[0] == new_args[1]) // .equal or ==
+}
+
+fun myError(args: ArrayList<Value>): Value {
+    println("ERROR ENDING PROGRAM")
+    exitProcess(0)
+}
+
+fun unwrapList(vals : ArrayList<Value>): ArrayList<Int> {
+
+    var result = ArrayList<Int>()
+
+    for (value in vals){
+        if(value is numV)
+        {
+            result.add(value.n)
+        }
+
+        else
+        {
+            exitProcess(0)
+        }
+    }
+    return result
+}
+
+fun env_extend( env: HashMap<String, Value> , parms : ArrayList<String>, argvals : ArrayList<Value>) {
+    var i = 0;
+    if (parms.size == argvals.size) {
+        while (i < parms.size) {
+            env[parms[i]] = argvals[i];
+            i++;
+        }
+    }
+    else{
+        System.out.println("GIYA invalid app");
+        exitProcess(0);
+    }
+}
+
+fun interp(exp: ExprC, env: HashMap<String, Value>): Value {
+    // numC
+    if (exp is numC) {
+        return numV(exp.n);
+        // stringC
+    } else if (exp is stringC) {
+        return stringV(exp.s);
+        // lamC
+    } else if (exp is lamC) {
+
+        // Array from ArrayList here
+        return cloV(exp.parm, exp.body, env);
+        // idC
+    } else if (exp is idC) {
+        return numV(4);
+        // this is wrong needs to be changed to env lookup
+
+        // ifC
+    } else if (exp is ifC) {
+
+        var result = interp(exp.then, env);
+        if(result is boolV){
+            if (result.b){
+                return interp(exp.then, env);
+            }
+            else if (result.b == false){
+                return interp(exp.elsey, env);
+            }
+            else{
+                System.out.println("GIYA non-boolean test");
+                exitProcess(0);
+            }
+        }
+    }
+    // appC
+    else if(exp is appC){
+        print("appc interp")
+        var match = interp(exp.func, env);
+        if (match is cloV){
+            lateinit var argvals: ArrayList<Value>
+            for (arg in exp.args) {
+                argvals.add(interp(arg, env));
+            }
+            // hopefully this env is updated
+
+            // make an Array from an ArrayList
+
+            env_extend(env, match.parms, argvals)
+            return interp (match.body, env);
+        }
+
+        else if (match is primV){
+
+            //[(primV op)
+            //    (define arg-vals (map (lambda ([a : ExprC]) (interp a env)) args) )
+            //(op arg-vals)]
+
+            lateinit var argvals: ArrayList<Value>
+            for (arg in exp.args) {
+                argvals.add(interp(arg, env));
+            }
+
+            return eagerEvaluation(match.op, argvals)
+
+            // return match.op(argvals) // we need argvals to be unwrapped
+            // return match // THIS IS WRONG WHAT IS OP????
+            // Racket: (define arg-vals (map (lambda ([a : ExprC]) (interp a env)) args)) (op arg-vals)]
+        }
+        else{
+            System.out.println("GIYA 2invalid appC " );
+            exitProcess(0);
+        }
+
+    }
+    System.out.println("GIYA 3invalid appC");
+    exitProcess(0);
+
+}
+
+
+
+// use envInitial.put(string, value) to put something in the hashmap
+// envInitial.put(string, value) will also update a value in the hashmap
+// use envInitial.get(string) to get the value of a string (from idC)
+var envInitial : HashMap<String, Value> =
+    hashMapOf("+" to primV("plus"), "-" to primV("minus"), "*" to primV("mult"), "/" to primV("div"),
+        "<=" to primV("leq"), "equal?" to primV("eqFunc"), "true" to boolV(true), "false" to boolV(false),
+        "error" to primV("myError"))
+
+fun testPrimV() {
+    val myArrayList =  arrayListOf<Value>(numV(2), numV(1))
+
+    val zeroArrayList =  arrayListOf<Value>(numV(1), numV(0))
+
+    val wrongArrayList1 =  arrayListOf<Value>(boolV(true), numV(0))
+
+    val wrongArrayList2 =  arrayListOf<Value>(numV(1), numV(2), numV(3))
+
+    print("plus(myArrayList) "+ plus(myArrayList) + " numV 3 " + numV(3));
+    assertEquals(plus(myArrayList), numV(3))
+    assertEquals(minus(myArrayList), numV(1))
+    assertEquals(div(myArrayList), numV(2))
+    assertEquals(mult(myArrayList), numV(2))
+    assertEquals(leq(myArrayList), boolV(false))
+    assertEquals(eqFunc(myArrayList), boolV(false))
+    assertNull(myError(myArrayList))
+
+    assertNull(div(zeroArrayList))
+
+    assertNull(plus(wrongArrayList1))
+    assertNull(minus(wrongArrayList1))
+    assertNull(div(wrongArrayList1))
+    assertNull(mult(wrongArrayList1))
+    assertNull(leq(wrongArrayList1))
+    assertNull(eqFunc(wrongArrayList1))
+
+    assertNull(plus(wrongArrayList2))
+    assertNull(minus(wrongArrayList2))
+    assertNull(div(wrongArrayList2))
+    assertNull(mult(wrongArrayList2))
+    assertNull(leq(wrongArrayList2))
+    assertNull(eqFunc(wrongArrayList2))
+}
+
+fun testNumV(){
+    val num = numV(7);
+    assertEquals(num.serialize(),"7");
+}
+
+fun testStringV(){
+    val str = stringV("HelloWorld");
+    assertEquals(str.serialize(),"HelloWorld");
+}
+
+fun testBoolV(){
+    val boo =boolV(false);
+    assertEquals(boo.serialize(),"false");
+}
+
+fun testCloV(){
+    val clo = cloV(arrayListOf("1", "2", "3"), numC(7), HashMap<String, Value>());
+    assertEquals(clo.serialize(),"#<procedure>");
+}
+
+fun testPrimv(){
+    val prim = primV("plus");
+    assertEquals(prim.serialize(),"#<primop>");
+}
+
+fun test_interp1() {
+    val num1 = numC(1)
+    val env = envInitial;
+    assertEquals (interp(num1, envInitial).serialize() ,"1")
+}
+
+fun test_interp2() {
+    val string1 = stringC("hello")
+    val env = envInitial;
+    assertEquals (interp(string1, envInitial).serialize() ,"hello")
+}
+
+fun test_interp3() {
+    val env = envInitial;
+    assertEquals(interp( appC(idC ("+"), arrayListOf<ExprC>(numC(1), numC(2))),  env), numV(3))
+
+}
+
+
+
+
+
+fun main() {
+    test_interp1()
+    test_interp2()
+    test_interp3()
+    testBoolV()
+    testCloV()
+    testNumV()
+    testPrimv()
+    testStringV()
+    testPrimV()
+}
