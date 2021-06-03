@@ -1,41 +1,11 @@
+import java.util.ArrayList
 
-// TASKS
-// ExprC definitions
-
-// environment stuff / primV - Riley
-// Value data definitions/  serialize - Zac
-// interp / ExprC data definitions - Sophia
-//
-abstract class ExprC(){
-}
-abstract class Environment(){
-}
-
-abstract class Value(){
-}
-class numC(exp: Integer): ExprC() {
-    private var numc: Integer = exp
-}
-
-class stringC(exp: String): ExprC() {
-    private var stringc: String = exp }
-
-class idC(name: String): ExprC() {
-    private var name: String = name
-}
-
-class lamC(body: ExprC, parm: Array<String>  ): ExprC() {
-    private var body: ExprC = body
-    private var parm: Array<String> = parm
-}
-
-class appC(exp: Integer): ExprC() {
-    private var numc: Integer = exp
-}
-
-class ifC(exp: Integer): ExprC() {
-    private var numc: Integer = exp
-}
-
+abstract class ExprC
+internal class numC(var n: Int) : ExprC()
+internal class stringC(var s: String) : ExprC()
+internal class idC(var name: Int) : ExprC()
+internal class lamC(var body: ExprC, var parm: ArrayList<String>) : ExprC()
+internal class appC(var func: ExprC, var args: ArrayList<ExprC>) : ExprC()
+internal class ifC(var test: ExprC, var then: ExprC, var elsey: ExprC) : ExprC()
 
 
