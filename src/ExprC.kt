@@ -5,18 +5,20 @@
 // environment stuff / primV - Riley
 // Value data definitions/  serialize - Zac
 // interp / ExprC data definitions - Sophia
-// 
+//
 abstract class ExprC(){
-
+}
+abstract class Environment(){
 }
 
+abstract class Value(){
+}
 class numC(exp: Integer): ExprC() {
     private var numc: Integer = exp
 }
 
 class stringC(exp: String): ExprC() {
-    private var stringc: String = exp
-}
+    private var stringc: String = exp }
 
 class idC(name: String): ExprC() {
     private var name: String = name
@@ -34,4 +36,6 @@ class appC(exp: Integer): ExprC() {
 class ifC(exp: Integer): ExprC() {
     private var numc: Integer = exp
 }
+
+
 
