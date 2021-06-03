@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="55cddabf-cbd9-466a-a024-f3f10a5cbb4b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Assignment9-.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Value.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\zackr\307\ToDoApp\Assignment9-\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1tMo5865vtgpoJ1xPIGohPwlYSE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zackr\307\ToDoApp\Assignment9-\src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="main.kt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="main.kt" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <module name="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Kotlin.main.kt" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SbtLocalSettings">
+    <option name="projectSyncType">
+      <map>
+        <entry key="$USER_HOME$/IdeaProjects/369FinalProject" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a4604e0d-7186-4659-a44b-401425751c97" name="Default Changelist" comment="" />
+      <created>1622588132938</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622588132938</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="484" y="104" key="#MainKt" timestamp="1622588969926">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="484" y="104" key="#MainKt/0.23.1440.832/-1920.23.1920.1057@0.23.1440.832" timestamp="1622588969926" />
+    <state x="239" y="100" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1622600414145">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="239" y="100" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.832@0.23.1440.832" timestamp="1622600414145" />
+    <state x="512" y="229" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1622600413094">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="512" y="229" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1440.832@0.23.1440.832" timestamp="1622600413094" />
+    <state width="1288" height="215" key="GridCell.Tab.0.bottom" timestamp="1622588725569">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state width="1288" height="215" key="GridCell.Tab.0.bottom/0.23.1440.832/-1920.23.1920.1057@0.23.1440.832" timestamp="1622588725569" />
+    <state width="1288" height="215" key="GridCell.Tab.0.center" timestamp="1622588725568">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state width="1288" height="215" key="GridCell.Tab.0.center/0.23.1440.832/-1920.23.1920.1057@0.23.1440.832" timestamp="1622588725568" />
+    <state width="1288" height="215" key="GridCell.Tab.0.left" timestamp="1622588725568">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state width="1288" height="215" key="GridCell.Tab.0.left/0.23.1440.832/-1920.23.1920.1057@0.23.1440.832" timestamp="1622588725568" />
+    <state width="1288" height="215" key="GridCell.Tab.0.right" timestamp="1622588725568">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state width="1288" height="215" key="GridCell.Tab.0.right/0.23.1440.832/-1920.23.1920.1057@0.23.1440.832" timestamp="1622588725568" />
+    <state x="411" y="165" key="new project wizard" timestamp="1622600743923">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="411" y="165" key="new project wizard/0.23.1440.832@0.23.1440.832" timestamp="1622600743923" />
+    <state x="440" y="179" width="670" height="676" key="search.everywhere.popup" timestamp="1622598958083">
+      <screen x="0" y="23" width="1440" height="832" />
+    </state>
+    <state x="440" y="179" width="670" height="676" key="search.everywhere.popup/0.23.1440.832@0.23.1440.832" timestamp="1622598958083" />
+  </component>
+</project>
